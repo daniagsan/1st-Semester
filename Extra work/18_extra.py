@@ -18,3 +18,4 @@ comision = 15
 bono = 40
 impuesto = 0.5
 nombre =  []
+
