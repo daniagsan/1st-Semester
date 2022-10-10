@@ -1,6 +1,8 @@
 from tkinter import *
 import random
 from tkinter import messagebox
+import time
+from tkinter import Menu
 
 ventana = Tk()
 ventana.title("Memorama")
@@ -8,7 +10,7 @@ ventana.iconbitmap("G:/Mi unidad/TAREAS IDS/Metodología de la programación/Jue
 ventana.geometry("500x500")
 
 memorama = [1,1,2,2,3,3,4,4,5,5,6,6]
-#random.shuffle(memorama)
+random.shuffle(memorama)
 
 tablero = Frame(ventana)
 tablero.pack(pady=20)
@@ -18,6 +20,19 @@ respuestas = []
 almacen_dict = {}
 global ganador
 ganador = 0
+
+def reiniciar():
+	global memorama, ganador
+
+	memoria_aviso.config(text = "")
+
+	memorama = [1,1,2,2,3,3,4,4,5,5,6,6]
+	random.shuffle(memorama)
+
+	botones = [bt0,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt10,bt11]
+	for button in botones:
+		button.config(text=" ", bg="SystemButtonFace", state="normal")
+	
 
 def vaciar():
 	global clics, respuestas, almacen_dict
@@ -51,13 +66,14 @@ def clickeo(bt, posicion):
 			memoria_aviso.config(text = "¡MEMORIA!")
 			for key in almacen_dict:
 				key["state"] = "disabled"
-
+			memoria_aviso.config(text = "")
 			ganador += 1
+
 			if ganador == 6:
 				victoria()
+
 		else:
-			aviso.config(text = "¡ERROR!")
-			messagebox.showinfo("¡Error!")
+			messagebox.showinfo("Error!")
 			borrar()
 		vaciar()
 
@@ -92,5 +108,13 @@ aviso.pack()
 
 memoria_aviso = Label(ventana, text="")
 memoria_aviso.pack()
+
+menu_ctrl = Menu(ventana)
+ventana.config(menu = menu_ctrl)
+
+menuprincipal = Menu(menu_ctrl, tearoff = False)
+menu_ctrl.add_cascade(label = "Opciones", menu = menuprincipal)
+menuprincipal.add_command(label = "Nueva Partida", command = reiniciar)
+menuprincipal.add_command(label = "Salir", command = ventana.quit)
 
 ventana.mainloop()
