@@ -1,22 +1,33 @@
 from tkinter import *
-import random
 from tkinter import messagebox
-import time
 from tkinter import Menu
+from PIL import ImageTk,Image
+import random
+import time
 import pygame
+
+pygame.init()
+pygame.mixer.init()
 
 ventana = Tk()
 ventana.title("Memorama")
 ventana.iconbitmap("G:/Mi unidad/TAREAS IDS/Metodología de la programación/Juego/Imágenes/juego-de-azar.ico")
 ventana.geometry("500x500")
 
-pygame.mixer.init()
+tablero = Frame(ventana)
+tablero.pack()
+
+match = pygame.mixer.Sound("G:\Mi unidad\TAREAS IDS\Metodología de la programación\Juego\musica\Memoria!.wav")
+background_music = pygame.mixer.Sound("G:/Mi unidad/TAREAS IDS/Metodología de la programación/Juego/musica/background.mp3")
+winner = pygame.mixer.Sound("G:\Mi unidad\TAREAS IDS\Metodología de la programación\Juego\musica\win.wav")
+
+
+background_music.play()
+match.set_volume(0.3)
+winner.set_volume(0.5)
 
 memorama = [1,1,2,2,3,3,4,4,5,5,6,6]
 random.shuffle(memorama)
-
-tablero = Frame(ventana)
-tablero.pack(pady=100)
 
 clics = 0
 respuestas = []
@@ -24,15 +35,12 @@ almacen_dict = {}
 global ganador
 ganador = 0
 
-def play():
-	pygame.mixer.music.load("G:/Mi unidad/TAREAS IDS/Metodología de la programación/Juego/musica/background.mp3")
-	pygame.mixer.music.set_volume(0.3)
-	pygame.mixer.music.play(loops=1)
-
-play()
 
 def reiniciar():
 	global memorama, ganador
+	ganador = 0
+	background_music.stop()
+	background_music.play()
 
 	memoria_aviso.config(text = "")
 
@@ -45,7 +53,7 @@ def reiniciar():
 	
 
 def vaciar():
-	global clics, respuestas, almacen_dict
+	global clics, respuestas, almacen_dict, error
 	
 	aviso.config(text="")
 	clics = 0
@@ -57,13 +65,15 @@ def borrar():
 		key["text"] = " "
 
 def victoria():
+	background_music.stop()
+	winner.play()
 	memoria_aviso.config(text = "WINNER DINNER CHICKEN DINNER")
 	botones = [bt0,bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9,bt10,bt11]
 	for button in botones:
 		button.config(bg="yellow")
 
 def clickeo(bt, posicion):
-	global clics, respuestas, almacen_dict, ganador
+	global clics, respuestas, almacen_dict, ganador, error
 
 	if bt["text"] == " " and clics < 2:
 		bt["text"] = memorama[posicion]
@@ -73,7 +83,9 @@ def clickeo(bt, posicion):
 	
 	if len(respuestas) == 2:
 		if memorama[respuestas[0]] == memorama[respuestas[1]]:
+			match.play()
 			for key in almacen_dict:
+				key.config(bg="magenta")
 				key["state"] = "disabled"
 			memoria_aviso.config(text = "")
 			ganador += 1
