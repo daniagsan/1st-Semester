@@ -1,3 +1,4 @@
+from email.mime import image
 from tkinter import *
 from tkinter import messagebox
 from tkinter import Menu
@@ -98,18 +99,42 @@ def clickeo(bt, posicion):
 			borrar()
 		vaciar()
 
-bt0 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt0,0), relief = "groove")
-bt1 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt1,1), relief = "groove")
-bt2 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt2,2), relief = "groove")
-bt3 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt3,3), relief = "groove")
-bt4 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt4,4), relief = "groove")
-bt5 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt5,5), relief = "groove")
-bt6 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt6,6), relief = "groove")
-bt7 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt7,7), relief = "groove")
-bt8 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt8,8), relief = "groove")
-bt9 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt9,9), relief = "groove")
-bt10 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt10,10), relief = "groove")
-bt11 = Button(tablero, text=" ", font=('Helvetica'), height=4, width=6, command=lambda:clickeo(bt11,11), relief = "groove")
+img= Image.open("Manzana.jpeg")
+resized=img.resize((160,240), Image.ANTIALIAS)
+img = ImageTk.PhotoImage(resized)
+
+img2= Image.open("Sandia.jpeg")
+resized=img2.resize((160,240), Image.ANTIALIAS)
+img2 = ImageTk.PhotoImage(resized)
+
+img3= Image.open("Naranja.jpeg")
+resized=img3.resize((160,240), Image.ANTIALIAS)
+img3 = ImageTk.PhotoImage(resized)
+
+img4= Image.open("platano.jpeg")
+resized=img4.resize((160,240), Image.ANTIALIAS)
+img4 = ImageTk.PhotoImage(resized)
+
+img5= Image.open("Pina.jpeg")
+resized=img5.resize((160,240), Image.ANTIALIAS)
+img5 = ImageTk.PhotoImage(resized)
+
+img6= Image.open("Queso.jpeg")
+resized=img6.resize((160,240), Image.ANTIALIAS)
+img6 = ImageTk.PhotoImage(resized)
+
+bt0 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt0,0), relief = "groove", image=img) 
+bt1 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt1,1), relief = "groove", image=img)
+bt2 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt2,2), relief = "groove", image=img2)
+bt3 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt3,3), relief = "groove", image=img2)
+bt4 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt4,4), relief = "groove", image=img3)
+bt5 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt5,5), relief = "groove", image=img3)
+bt6 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt6,6), relief = "groove", image=img4)
+bt7 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt7,7), relief = "groove", image=img4)
+bt8 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt8,8), relief = "groove", image=img5)
+bt9 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt9,9), relief = "groove", image=img5)
+bt10 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt10,10), relief = "groove", image=img6)
+bt11 = Button(tablero, text=" ", font=('Helvetica'), height=160, width=240, command=lambda:clickeo(bt11,11), relief = "groove", image=img6)
 
 bt0.grid(row=0, column=0)
 bt1.grid(row=0, column=1)
